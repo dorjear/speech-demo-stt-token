@@ -10,7 +10,7 @@ export default function App() {
     const [displayText, setDisplayText] = useState('INITIALIZED: ready to test speech...');
     const [player, updatePlayer] = useState({p: undefined, muted: false});
 
-    async function sttFromMic() {
+    async function startRecording() {
         const tokenObj = await getTokenOrRefresh();
         const speechConfig = speechsdk.SpeechConfig.fromAuthorizationToken(tokenObj.authToken, tokenObj.region);
         speechConfig.speechRecognitionLanguage = 'en-US';
@@ -73,7 +73,7 @@ export default function App() {
         });
     }
 
-    async function fileChange(event) {
+    async function handleFileChange(event) {
         const audioFile = event.target.files[0];
         console.log(audioFile);
         const fileInfo = audioFile.name + ` size=${audioFile.size} bytes `;
@@ -105,25 +105,25 @@ export default function App() {
 
             <div className="row main-container">
                 <div className="col-6">
-                    <i className="fas fa-microphone fa-lg mr-2" onClick={() => sttFromMic()}></i>
+                    <i className="fas fa-microphone fa-lg mr-2" onClick={() => startRecording()}/>
                     Convert speech to text from your mic.
 
                     <div className="mt-2">
-                        <label htmlFor="audio-file"><i className="fas fa-file-audio fa-lg mr-2"></i></label>
+                        <label htmlFor="audio-file"><i className="fas fa-file-audio fa-lg mr-2"/></label>
                         <input 
                             type="file" 
                             id="audio-file" 
-                            onChange={(e) => fileChange(e)} 
+                            onChange={(e) => handleFileChange(e)}
                             style={{display: "none"}} 
                         />
                         Convert speech to text from an audio file.
                     </div>
                     <div className="mt-2">
-                        <i className="fas fa-volume-up fa-lg mr-2" onClick={() => textToSpeech()}></i>
+                        <i className="fas fa-volume-up fa-lg mr-2" onClick={() => textToSpeech()}/>
                         Convert text to speech.
                     </div>
                     <div className="mt-2">
-                        <i className="fas fa-volume-mute fa-lg mr-2" onClick={() => handleMute()}></i>
+                        <i className="fas fa-volume-mute fa-lg mr-2" onClick={() => handleMute()}/>
                         Pause/resume text to speech output.
                     </div>
 

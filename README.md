@@ -24,10 +24,10 @@ For a full list of supported locales, see the [language support article](https:/
 
 ## Speech-to-text from microphone
 
-To convert speech-to-text using a microphone, run the app and then click **Convert speech to text from your mic.**. This will prompt you for access to your microphone, and then listen for you to speak. The following function `sttFromMic` in `App.js` contains the implementation.
+To convert speech-to-text using a microphone, run the app and then click **Convert speech to text from your mic.**. This will prompt you for access to your microphone, and then listen for you to speak. The following function `startRecording` in `App.js` contains the implementation.
 
 ```javascript
-async sttFromMic() {
+async startRecording() {
     const tokenObj = await getTokenOrRefresh();
     const speechConfig = speechsdk.SpeechConfig.fromAuthorizationToken(tokenObj.authToken, tokenObj.region);
     speechConfig.speechRecognitionLanguage = 'en-US';
@@ -63,10 +63,10 @@ const recognizer = new speechsdk.SpeechRecognizer(speechConfig, audioConfig);
 
 ## Speech-to-text from file
 
-To convert speech-to-text from an audio file, run the app and then click **Convert speech to text from an audio file.**. This will open a file browser and allow you to select an audio file. The following function `fileChange` is bound to an event handler that detects the file change. 
+To convert speech-to-text from an audio file, run the app and then click **Convert speech to text from an audio file.**. This will open a file browser and allow you to select an audio file. The following function `handleFileChange` is bound to an event handler that detects the file change. 
 
 ```javascript
-async fileChange(event) {
+async handleFileChange(event) {
     const audioFile = event.target.files[0];
     console.log(audioFile);
     const fileInfo = audioFile.name + ` size=${audioFile.size} bytes `;
